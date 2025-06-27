@@ -9,6 +9,7 @@ from gtts import gTTS
 import base64, csv, os, json
 from datetime import datetime
 import numpy as np
+import torch
 import re, io
 from io import BytesIO
 import pandas as pd
@@ -106,8 +107,13 @@ header[data-testid="stHeader"] {
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))   # <-- use env var for deployment
 gemini = genai.GenerativeModel("gemini-1.5-flash")
 
-classifier = pipeline("text-classification",
-    model="j-hartmann/emotion-english-distilroberta-base", top_k=1)
+classifier = pipeline(
+    "text-classification",
+    model="SamLowe/roberta-base-emotion-safetensors",  # ← pick from table
+    top_k=1,
+    device=-1,                             # CPU
+    model_kwargs={"torch_dtype": torch.float32}
+)
 
 embedder  = SentenceTransformer("all-MiniLM-L6-v2")
 translator = Translator()
