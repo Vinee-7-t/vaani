@@ -98,9 +98,9 @@ header[data-testid="stHeader"] {
 """, unsafe_allow_html=True)
 
 # ---- 2. Config / Keys --------------------------------------------------------
-genai.configure(api_key="AIzaSyCn3TcUxMWTK-y6d8i0Hwj5PGqDYwtrELU")
+#genai.configure(api_key="AIzaSyCn3TcUxMWTK-y6d8i0Hwj5PGqDYwtrELU")
 
-#genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))   # <-- use env var for deployment
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))   # <-- use env var for deployment
 gemini = genai.GenerativeModel("gemini-1.5-flash")
 
 classifier = pipeline("text-classification",
