@@ -179,7 +179,10 @@ def vaani_reply(user_input):
     
     raw      = classifier(text_en)[0][0]["label"].lower()
     emotion  = raw  
-    if any(k in text_en.lower() for k in confused_kw):
+    happy_kw = ["birthday", "party", "excited", "cake", "gift", "celebrate"]
+    if any(k in text_en.lower() for k in happy_kw):
+        emotion = "joy"
+    elif any(k in text_en.lower() for k in confused_kw):
         emotion = "confused"
     elif any(k in text_en.lower() for k in sad_kw):
         emotion = "sadness"
