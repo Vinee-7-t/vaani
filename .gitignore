@@ -1,0 +1,6 @@
+# ignore virtual-env & runtime data
+venv/
+mood_log.csv
+voice.mp3
+saved_sessions/
+__pycache__/

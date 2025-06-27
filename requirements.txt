@@ -1,0 +1,10 @@
+streamlit>=1.32
+matplotlib
+google-generativeai
+sentence-transformers
+faiss-cpu
+transformers
+googletrans==4.0.0rc1
+gTTS
+scikit-learn
+pandas
