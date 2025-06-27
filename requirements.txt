@@ -8,4 +8,5 @@ googletrans==4.0.0rc1
 gTTS
 scikit-learn
 pandas
-torch==2.1.2
+torch>=2.6.0
+
