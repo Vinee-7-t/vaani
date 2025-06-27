@@ -21,7 +21,10 @@ if "view" not in st.session_state:
 
 def vaani_reply(user_input):
     # ... (existing code up to raw)
-    emotion = raw                               # default
+    emotion = raw   
+    happy_kw = ["birthday", "party", "excited", "cake", "gift", "celebrate"]
+    if any(k in text_en.lower() for k in happy_kw):
+        emotion = "joy"
     if any(k in text_en.lower() for k in confused_kw):
         emotion = "confused"
     elif any(k in text_en.lower() for k in sad_kw):
