@@ -105,7 +105,7 @@ header[data-testid="stHeader"] {
 #genai.configure(api_key="AIzaSyCn3TcUxMWTK-y6d8i0Hwj5PGqDYwtrELU")
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))   # <-- use env var for deployment
-gemini = genai.GenerativeModel("gemini-1.5-flash")
+gemini = genai.GenerativeModel("gemini-1.5-flash", device='cpu')
 
 classifier = pipeline(
     "text-classification",
