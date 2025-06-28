@@ -116,6 +116,17 @@ classifier = pipeline(
 )
 embedder  = SentenceTransformer("all-MiniLM-L6-v2")
 translator = Translator()
+# ---------- Helper: safe tensor ➜ NumPy ------------------------------------
+def to_numpy(tensor_or_list):
+    """
+    sentence‑transformers on Streamlit Cloud returns PyTorch tensors.
+    This converts either a single tensor or a list of tensors to a
+    stacked NumPy array so we can feed it into cosine_similarity.
+    """
+    if isinstance(tensor_or_list, (list, tuple)):
+        return np.vstack([t.detach().cpu().numpy() for t in tensor_or_list])
+    else:  # single tensor
+        return tensor_or_list.detach().cpu().numpy().reshape(1, -1)
 
 # ---- 3. Load RAG files -------------------------------------------------------
 def load_rag(path): 
