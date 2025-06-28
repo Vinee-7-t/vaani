@@ -1,14 +1,14 @@
 streamlit>=1.32
 matplotlib
 google-generativeai
-sentence-transformers
+sentence-transformers==2.6.1  
 faiss-cpu
-transformers
+transformers==4.41.0
 googletrans==4.0.0rc1
 gTTS
 scikit-learn
 pandas
-torch==2.2.2+cpu
+torch==2.1.2+cpu
 -f https://download.pytorch.org/whl/cpu
 
 
