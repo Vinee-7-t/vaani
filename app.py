@@ -115,14 +115,10 @@ classifier = pipeline(
     model_kwargs={"torch_dtype": torch.float32}
 )
 
-DEVICE = torch.device("cpu")          # Streamlit Cloud => CPU only
-
-embedder = SentenceTransformer(
-    "sentence-transformers/all-MiniLM-L6-v2",  # (explicit hub path is safer)
-    device=str(DEVICE)                         # <- force CPU
-).eval()                                       # not training, so save RAM/ops
-
-embedder._target_device = DEVICE 
+embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+embedder.to(torch.device("cpu"))              # 🧠 Safe device transfer (works in CPU env)
+embedder.eval()                               # 🔒 Disable gradients
+embedder._target_device = torch.device("cpu")
 #embedder  = SentenceTransformer("all-MiniLM-L6-v2")
 #embedder._target_device = torch.device("cpu")
 translator = Translator()
