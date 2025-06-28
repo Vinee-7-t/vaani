@@ -122,7 +122,13 @@ def load_rag(path):
     with open(path,"r",encoding="utf-8") as f: return [ln.strip() for ln in f if ln.strip()]
 
 rag_en, rag_hi = load_rag("rag_data.txt"), load_rag("rag_data_hi.txt")
-emb_en, emb_hi = embedder.encode(rag_en), embedder.encode(rag_hi)
+
+# ➜ force NumPy output
+emb_en = embedder.encode(rag_en, convert_to_numpy=True)
+emb_hi = embedder.encode(rag_hi, convert_to_numpy=True)
+
+#rag_en, rag_hi = load_rag("rag_data.txt"), load_rag("rag_data_hi.txt")
+#emb_en, emb_hi = embedder.encode(rag_en), embedder.encode(rag_hi)
 
 # ---- 4. Emojis & heuristics --------------------------------------------------
 emotion_emoji = {"sadness":"😢","joy":"😊","anger":"😠","fear":"😨",
@@ -196,7 +202,10 @@ def vaani_reply(user_input):
     emoji    = emotion_emoji.get(emotion,"🤖")
 
     rag, emb = (rag_hi, emb_hi) if lang=="hi" else (rag_en,emb_en)
-    top      = rag[np.argmax(cosine_similarity(embedder.encode([text_en]), emb))]
+    user_vec = embedder.encode([text_en], convert_to_numpy=True)
+    top      = rag[np.argmax(cosine_similarity(user_vec, emb))]
+
+    #top      = rag[np.argmax(cosine_similarity(embedder.encode([text_en]), emb))]
 
     ctx_lines = [m for _, m, _ in st.session_state.history[-4:]]
 
