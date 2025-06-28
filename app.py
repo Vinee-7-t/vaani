@@ -115,10 +115,12 @@ classifier = pipeline(
     model_kwargs={"torch_dtype": torch.float32}
 )
 
-embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-embedder.to(torch.device("cpu"))              # 🧠 Safe device transfer (works in CPU env)
-embedder.eval()                               # 🔒 Disable gradients
-embedder._target_device = torch.device("cpu")
+embedder = SentenceTransformer(
+    "sentence-transformers/all-MiniLM-L6-v2",
+    device="cpu"          # load directly on CPU (no extra .to())
+)
+embedder.eval()           # set to inference mode (keep this line)
+
 #embedder  = SentenceTransformer("all-MiniLM-L6-v2")
 #embedder._target_device = torch.device("cpu")
 translator = Translator()
