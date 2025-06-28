@@ -112,7 +112,7 @@ classifier = pipeline(
     model="SamPatel/distilroberta-base-emotion-safetensors",  # ← pick from table
     top_k=1,
     device=-1,
-    use_auth_token=st.secrets["huggingface_token"]
+    use_auth_token=st.secrets["huggingface_token"],
     model_kwargs={"torch_dtype": torch.float32}
 )
 
