@@ -133,10 +133,9 @@ def load_rag(path):
     with open(path,"r",encoding="utf-8") as f: return [ln.strip() for ln in f if ln.strip()]
 
 rag_en, rag_hi = load_rag("rag_data.txt"), load_rag("rag_data_hi.txt")
+emb_en = to_numpy(embedder.encode(rag_en))
+emb_hi = to_numpy(embedder.encode(rag_hi))
 
-# ➜ force NumPy output
-emb_en = embedder.encode(rag_en, convert_to_numpy=True)
-emb_hi = embedder.encode(rag_hi, convert_to_numpy=True)
 
 #rag_en, rag_hi = load_rag("rag_data.txt"), load_rag("rag_data_hi.txt")
 #emb_en, emb_hi = embedder.encode(rag_en), embedder.encode(rag_hi)
