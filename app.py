@@ -105,7 +105,7 @@ header[data-testid="stHeader"] {
 #genai.configure(api_key="AIzaSyCn3TcUxMWTK-y6d8i0Hwj5PGqDYwtrELU")
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))   # <-- use env var for deployment
-gemini = genai.GenerativeModel("gemini-1.5-flash", device='cpu')
+gemini = genai.GenerativeModel("gemini-1.5-flash")
 
 classifier = pipeline(
     "text-classification",
@@ -115,7 +115,7 @@ classifier = pipeline(
     model_kwargs={"torch_dtype": torch.float32}
 )
 
-embedder  = SentenceTransformer("all-MiniLM-L6-v2")
+embedder  = SentenceTransformer("all-MiniLM-L6-v2", device='cpu')
 translator = Translator()
 
 # ---- 3. Load RAG files -------------------------------------------------------
