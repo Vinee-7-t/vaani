@@ -115,7 +115,8 @@ classifier = pipeline(
     model_kwargs={"torch_dtype": torch.float32}
 )
 
-embedder  = SentenceTransformer("all-MiniLM-L6-v2", device='cpu')
+embedder  = SentenceTransformer("all-MiniLM-L6-v2")
+embedder._target_device = torch.device("cpu")
 translator = Translator()
 
 # ---- 3. Load RAG files -------------------------------------------------------
