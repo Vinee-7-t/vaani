@@ -6,10 +6,11 @@ googletrans==4.0.0rc1
 gTTS
 scikit-learn
 pandas
-torch==2.1.2
+numpy==1.26.4              
+torch>=2.1,<2.3 
+
 sentence-transformers>=2.2.0,<3.0.0
 transformers==4.40.0
-numpy>=1.24
 
 
 
